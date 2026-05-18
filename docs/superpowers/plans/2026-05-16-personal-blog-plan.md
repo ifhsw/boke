@@ -2120,3 +2120,16 @@ cp prisma/dev.db /www/backup/blog-$(date +%Y%m%d).db
 - Modify: `src/app/api/upload/route.ts` — Changed from admin-only to any authenticated user
 
 - [x] Non-admin users can now upload images/files for Q&A questions
+
+---
+
+### Task 24: Delete User (Completed)
+
+**Files:**
+- Modify: `src/actions/auth.ts` — Added `deleteUser` action
+- Create: `src/components/DeleteUserButton.tsx`
+- Modify: `src/app/admin/users/page.tsx` — Added DeleteUserButton + auth checks
+
+- [x] **Step 1: deleteUser action** — Admin-only, cannot delete self or other admins, cascades clean up posts/comments/questions
+- [x] **Step 2: DeleteUserButton** — Confirm-then-delete UX, hidden for self and other admins
+- [x] **Step 3: Users page** — Shows delete button only for non-admin users who are not the current user
