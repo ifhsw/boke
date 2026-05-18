@@ -2020,3 +2020,103 @@ pm2 startup
 # 5. Database backup (宝塔计划任务, daily):
 cp prisma/dev.db /www/backup/blog-$(date +%Y%m%d).db
 ```
+
+---
+
+### Task 17: Tag Filtering & Search (Completed)
+
+**Files:**
+- Create: `src/app/tag/[name]/page.tsx`
+- Create: `src/app/search/page.tsx`
+- Modify: `src/components/Sidebar.tsx`
+- Modify: `src/components/NavBar.tsx`
+
+- [x] **Step 1: Create tag page** — `/tag/[name]` shows all published posts with that tag using PostCard
+- [x] **Step 2: Update sidebar tags** — Links from `/archive` to `/tag/[name]`
+- [x] **Step 3: Add search input to NavBar** — Inline search form submits to `/search?q=`
+- [x] **Step 4: Create search page** — Server-side Prisma `contains` search on title + content
+
+---
+
+### Task 18: Admin Settings — Background & About Editor (Completed)
+
+**Files:**
+- Create: `prisma/schema.prisma` — Added `SiteSetting` model
+- Create: `src/actions/settings.ts`
+- Create: `src/components/BackgroundUploader.tsx`
+- Create: `src/components/AboutEditor.tsx`
+- Create: `src/app/admin/settings/page.tsx`
+- Modify: `src/app/layout.tsx` — Dynamic background via `<style>` tag
+- Modify: `src/app/about/page.tsx` — Reads `about_content` from DB
+- Modify: `src/components/AdminSidebar.tsx` — Added "站点设置" link
+
+- [x] **Step 1: Add SiteSetting model** — Key-value store for `background` and `about_content`
+- [x] **Step 2: Background upload** — Admin uploads wallpaper image, applies to all pages
+- [x] **Step 3: About editor** — Markdown editor with preview, image upload, saves to DB
+- [x] **Step 4: About page** — Custom content renders below original cards; fallback to defaults
+
+---
+
+### Task 19: Bug Fixes (Completed)
+
+- [x] **Logout refresh** — `LogoutButton.tsx` calls `router.refresh()` after signOut
+- [x] **Chinese slug fix** — `slugify` returns empty for pure Chinese titles; fallback to timestamp
+- [x] **Background not displaying** — Switched from CSS variable to `<style>` tag injection; added `dynamic = "force-dynamic"`
+- [x] **Deleted 22.jpg** — Removed hardcoded 711KB background image from repo
+
+---
+
+### Task 20: Anonymous Q&A System (Completed)
+
+**Files:**
+- Create: `prisma/schema.prisma` — Added `Question` model
+- Create: `src/actions/questions.ts`
+- Create: `src/app/qa/page.tsx`
+- Create: `src/components/QaForm.tsx`
+- Create: `src/components/QuestionList.tsx`
+- Modify: `src/components/NavBar.tsx` — Added "问答" nav link
+
+- [x] **Step 1: Add Question model** — content, userId, reply, repliedAt
+- [x] **Step 2: Create server actions** — createQuestion, replyToQuestion, deleteQuestion
+- [x] **Step 3: Create QA page** — Role-based: users see own questions, admin sees all with real names
+- [x] **Step 4: Rich text support** — Markdown rendering, image/file upload in questions and replies
+- [x] **Step 5: Edit replies** — Admin can modify replies after posting
+
+---
+
+### Task 21: Password Management (Completed)
+
+**Files:**
+- Modify: `src/actions/auth.ts` — Added `changePassword`, `resetUserPassword`
+- Create: `src/components/ChangePasswordForm.tsx`
+- Create: `src/components/ResetPasswordButton.tsx`
+- Modify: `src/app/admin/settings/page.tsx` — Added password change section
+- Modify: `src/app/admin/users/page.tsx` — Added reset password button
+
+- [x] **Step 1: changePassword action** — Admin changes own password, verifies current password
+- [x] **Step 2: resetUserPassword action** — Admin resets any user's password (no old password needed)
+- [x] **Step 3: Settings page** — Password change card with ChangePasswordForm
+- [x] **Step 4: Users page** — ResetPasswordButton per user row
+
+---
+
+### Task 22: User Account Self-Service (Completed)
+
+**Files:**
+- Create: `src/app/account/page.tsx`
+- Create: `src/components/QuestionDeleteButton.tsx`
+- Modify: `src/components/NavBar.tsx` — Username links to `/account`
+- Modify: `src/components/QuestionList.tsx` — Delete button on questions
+
+- [x] **Step 1: Create account page** — Show user info, change password, manage questions
+- [x] **Step 2: Delete question** — Users delete own, admin deletes any; confirm-then-delete UX
+- [x] **Step 3: NavBar link** — Desktop username + mobile drawer link to `/account`
+
+---
+
+### Task 23: Upload API Permission Fix (Completed)
+
+**Files:**
+- Modify: `src/app/api/upload/route.ts` — Changed from admin-only to any authenticated user
+
+- [x] Non-admin users can now upload images/files for Q&A questions
