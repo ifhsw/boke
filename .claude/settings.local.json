@@ -69,7 +69,13 @@
       "Bash(git -C C:/Users/shi/Desktop/book commit -m \"chore: update blog submodule, docs, and settings\")",
       "Bash(git -C C:/Users/shi/Desktop/book add blog .claude/settings.local.json docs/)",
       "Bash(git -C C:/Users/shi/Desktop/book add .claude/settings.local.json)",
-      "Bash(git -C C:/Users/shi/Desktop/book commit --amend --no-edit)"
+      "Bash(git -C C:/Users/shi/Desktop/book commit --amend --no-edit)",
+      "Bash(git -C C:/Users/shi/Desktop/book/blog status --short)",
+      "Bash(git -C C:/Users/shi/Desktop/book log --oneline -5)",
+      "Bash(git -C C:/Users/shi/Desktop/book/blog log --oneline -3)",
+      "Bash(git -C C:/Users/shi/Desktop/book/blog commit -m \"chore: security audit - remove unused files, fix hardcoded password, protect error logs\")",
+      "Bash(git -C C:/Users/shi/Desktop/book add blog docs/code-audit-2026-05-18.md .claude/settings.local.json)",
+      "Bash(git -C C:/Users/shi/Desktop/book commit -m \"docs: add code audit report, update blog submodule\")"
     ]
   }
 }
