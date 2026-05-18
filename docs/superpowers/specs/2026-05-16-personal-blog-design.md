@@ -18,24 +18,24 @@
 
 ### 前台页面
 
-| 页面 | 路由 | 说明 |
-|------|------|------|
-| 首页 | `/` | 最新文章卡片列表 + 侧边栏（标签云、最近文章） |
-| 频道页 | `/tech`, `/essay` | 按分类浏览文章 |
-| 文章详情 | `/post/[slug]` | MDX 渲染 + 评论区 |
-| 归档页 | `/archive` | 按年份时间线浏览 |
-| 关于页 | `/about` | 个人介绍 |
-| 登录 | `/login` | 读者和管理员登录 |
-| 注册 | `/register` | 读者注册 |
+| 页面   | 路由                | 说明                       |
+| ---- | ----------------- | ------------------------ |
+| 首页   | `/`               | 最新文章卡片列表 + 侧边栏（标签云、最近文章） |
+| 频道页  | `/tech`, `/essay` | 按分类浏览文章                  |
+| 文章详情 | `/post/[slug]`    | MDX 渲染 + 评论区             |
+| 归档页  | `/archive`        | 按年份时间线浏览                 |
+| 关于页  | `/about`          | 个人介绍                     |
+| 登录   | `/login`          | 读者和管理员登录                 |
+| 注册   | `/register`       | 读者注册                     |
 
 ### 后台页面（管理员）
 
-| 页面 | 路由 | 说明 |
-|------|------|------|
-| 仪表盘 | `/admin` | 文章数、评论数、读者数统计 |
-| 文章管理 | `/admin/posts` | 写/编辑/删除文章，MDX 编辑器 + 实时预览 |
-| 评论管理 | `/admin/comments` | 审核/删除评论 |
-| 用户管理 | `/admin/users` | 查看所有读者完整信息（邮箱、注册时间、评论历史等） |
+| 页面   | 路由                | 说明                        |
+| ---- | ----------------- | ------------------------- |
+| 仪表盘  | `/admin`          | 文章数、评论数、读者数统计             |
+| 文章管理 | `/admin/posts`    | 写/编辑/删除文章，MDX 编辑器 + 实时预览  |
+| 评论管理 | `/admin/comments` | 审核/删除评论                   |
+| 用户管理 | `/admin/users`    | 查看所有读者完整信息（邮箱、注册时间、评论历史等） |
 
 ### 响应式
 
@@ -46,58 +46,58 @@
 
 ### User（用户）
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| id | String (UUID) | 主键 |
-| username | String | 用户名，唯一 |
-| email | String | 邮箱，唯一 |
-| passwordHash | String | bcrypt 哈希 |
-| role | Enum (ADMIN, READER) | 角色 |
-| avatar | String? | 头像 URL |
-| createdAt | DateTime | 创建时间 |
+| 字段           | 类型                   | 说明        |
+| ------------ | -------------------- | --------- |
+| id           | String (UUID)        | 主键        |
+| username     | String               | 用户名，唯一    |
+| email        | String               | 邮箱，唯一     |
+| passwordHash | String               | bcrypt 哈希 |
+| role         | Enum (ADMIN, READER) | 角色        |
+| avatar       | String?              | 头像 URL    |
+| createdAt    | DateTime             | 创建时间      |
 
 ### Post（文章）
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| id | String (UUID) | 主键 |
-| title | String | 标题 |
-| slug | String | URL 友好标识，唯一 |
-| excerpt | String? | 摘要 |
-| content | String | MDX 内容 |
-| coverImage | String? | 封面图 URL |
-| category | Enum (TECH, ESSAY) | 分类 |
-| status | Enum (DRAFT, PUBLISHED) | 状态 |
-| authorId | String (FK) | 作者 |
-| createdAt | DateTime | 创建时间 |
-| updatedAt | DateTime | 更新时间 |
+| 字段         | 类型                      | 说明          |
+| ---------- | ----------------------- | ----------- |
+| id         | String (UUID)           | 主键          |
+| title      | String                  | 标题          |
+| slug       | String                  | URL 友好标识，唯一 |
+| excerpt    | String?                 | 摘要          |
+| content    | String                  | MDX 内容      |
+| coverImage | String?                 | 封面图 URL     |
+| category   | Enum (TECH, ESSAY)      | 分类          |
+| status     | Enum (DRAFT, PUBLISHED) | 状态          |
+| authorId   | String (FK)             | 作者          |
+| createdAt  | DateTime                | 创建时间        |
+| updatedAt  | DateTime                | 更新时间        |
 
 ### Tag（标签）
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| id | String (UUID) | 主键 |
-| name | String | 标签名，唯一 |
+| 字段   | 类型            | 说明     |
+| ---- | ------------- | ------ |
+| id   | String (UUID) | 主键     |
+| name | String        | 标签名，唯一 |
 
 ### PostTag（文章-标签关联）
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
+| 字段     | 类型          | 说明    |
+| ------ | ----------- | ----- |
 | postId | String (FK) | 文章 ID |
-| tagId | String (FK) | 标签 ID |
+| tagId  | String (FK) | 标签 ID |
 
 联合主键 (postId, tagId)。
 
 ### Comment（评论）
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| id | String (UUID) | 主键 |
-| content | String | 评论内容 |
-| postId | String (FK) | 所属文章 |
-| userId | String (FK) | 评论者 |
-| parentId | String? (FK) | 父评论 ID，支持嵌套回复 |
-| createdAt | DateTime | 创建时间 |
+| 字段        | 类型            | 说明            |
+| --------- | ------------- | ------------- |
+| id        | String (UUID) | 主键            |
+| content   | String        | 评论内容          |
+| postId    | String (FK)   | 所属文章          |
+| userId    | String (FK)   | 评论者           |
+| parentId  | String? (FK)  | 父评论 ID，支持嵌套回复 |
+| createdAt | DateTime      | 创建时间          |
 
 ## 认证与安全
 
@@ -152,11 +152,15 @@
 
 ## 视觉风格
 
-温暖文艺风格：
-- 暖色调（琥珀色、棕色系为主色调）
+   主色调：冷灰、墨黑、苍蓝，低饱和高对比
+
+&#x20;
+
+- 氛围：孤绝、肃杀、静谧、宿命感
+- 元素：玄龙、古桥、残雪、古刹、阴云
+- 笔触：写意留白，线条凌厉，自带颗粒质感
 - 圆角卡片布局
 - 柔和阴影
-- 舒适亲切的阅读氛围
 - 中文字体优化
 
 ## 语言
