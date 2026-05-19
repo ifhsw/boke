@@ -1,8 +1,9 @@
 # 代码审计报告
 
-> 审计日期：2026-05-19
+> 审计日期：2026-05-19（更新于 2026-05-19）
 > 范围：`C:\Users\shi\Desktop\book\blog`
 > 状态：**高危问题已修复，中等问题已记录**
+> 新增功能：文章可见性 (visibility) — 已审查通过
 
 ---
 
@@ -106,6 +107,7 @@
 - **无 SQL 注入** — 全部使用 Prisma ORM，无 `$queryRaw`/`$executeRaw`
 - **文章所有权检查** — `updatePost`/`deletePost` 验证 `isAdmin || authorId === userId`
 - **非管理员强制草稿** — `createPost`/`updatePost` 对非 Admin 用户强制 `finalStatus = "DRAFT"`
+- **文章可见性控制** — 新增 `visibility` 字段 (PUBLIC/PRIVATE)，仅作者+管理员可查看私密文章；公开页面 (首页/频道/归档/搜索/标签/侧边栏/用户主页) 统一过滤 `visibility: "PUBLIC"`；管理员修改可见性通过 `updatePost` 中的 `isAdmin` 守卫保护
 - **密码安全** — bcrypt，盐轮数 10
 - **JWT 安全** — 服务端存储 role/id，不依赖客户端
 - **CSRF 防护** — Next.js Server Actions 内置
