@@ -2023,6 +2023,36 @@ cp prisma/dev.db /www/backup/blog-$(date +%Y%m%d).db
 
 ---
 
+### Task 25: Comment System Fixes (Completed)
+
+- [x] **Step 1: Fix recursive nestComments** — Rewrote `nestComments()` to use Map-based recursive approach, supports arbitrary nesting depth
+- [x] **Step 2: Reply-to-username indicator** — Reply banner now shows "回复 @username" instead of generic text
+- [x] **Step 3: Link usernames to profiles** — All username displays in comments, posts, and admin pages link to `/user/[username]`
+
+### Task 26: User Post Creation (Completed)
+
+**Files:**
+- Modify: `src/actions/posts.ts` — Allow logged-in users; non-admin forced DRAFT; ownership checks
+- Modify: `src/components/PostEditor.tsx` — Added `showStatus` prop for non-admin mode
+- Create: `src/app/my-posts/layout.tsx` — Auth protection (login required)
+- Create: `src/app/my-posts/page.tsx` — User's own posts list with edit/delete
+- Create: `src/app/my-posts/new/page.tsx` — Write post (auto DRAFT, no status selector)
+- Create: `src/app/my-posts/[id]/edit/page.tsx` — Edit own post (ownership check)
+- Modify: `src/components/NavBar.tsx` — "写文章" (all users), "我的文章" (non-admin), "管理" (admin)
+- Modify: `src/components/Header.tsx` — Pass `isLoggedIn` prop
+
+### Task 27: User Profiles (Completed)
+
+**Files:**
+- Modify: `prisma/schema.prisma` — Added bio, website, location, github, twitter fields
+- Create: `src/actions/profile.ts` — updateProfile server action
+- Create: `src/components/ProfileEditForm.tsx` — Form for bio/website/location/github/twitter
+- Create: `src/app/user/[username]/page.tsx` — Public profile with avatar, bio, social links, published posts
+- Modify: `src/app/account/page.tsx` — Integrated profile editing + "查看我的主页" link
+- Modify: `src/app/post/[slug]/page.tsx` — Author name links to profile
+- Modify: `src/app/admin/comments/page.tsx` — Username links to profile
+- Modify: `src/app/admin/users/page.tsx` — Username links to profile
+
 ### Task 17: Tag Filtering & Search (Completed)
 
 **Files:**
