@@ -1,0 +1,153 @@
+<h2>三种编辑器实现方案</h2>
+<p class="subtitle">约束：必须保持 MDX 兼容，不破坏已有文章内容</p>
+
+<div class="options">
+  <div class="option" data-choice="milkdown" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Milkdown — WYSIWYG Markdown 编辑器 (推荐)</h3>
+      <p>基于 ProseMirror，输出纯 Markdown 字符串，与现有 MDX 管线无缝对接。</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>输出 Markdown，零迁移成本，MDX 渲染不动</li>
+            <li>内置工具栏、slash 命令、拖拽粘贴图片</li>
+            <li>插件生态丰富 (toolbar, clipboard, emoji, prism, math)</li>
+            <li>所见即所得 + Markdown 快捷输入双模式</li>
+            <li>包体积适中 (~150KB gzipped)</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>ProseMirror 有一定学习曲线</li>
+            <li>自定义 MDX 组件 (Callout/Info/Warn) 需要额外适配</li>
+            <li>中文输入法兼容需要测试</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="tiptap" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>TipTap — 富文本编辑器</h3>
+      <p>同样基于 ProseMirror，生态最大，但默认输出 JSON/HTML，需转换层输出 Markdown。</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>最大社区，文档最完善</li>
+            <li>扩展极丰富 (table, image, code-block, collaboration)</li>
+            <li>React 集成成熟 (@tiptap/react)</li>
+            <li>中文支持经过大量验证</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>默认存储格式是 JSON，需引入 Markdown 序列化插件</li>
+            <li>Markdown 序列化可能丢失高级结构 (Callout, Info/Warn 组件)</li>
+            <li>包体积更大 (~200KB+ gzipped)</li>
+            <li>维护两套渲染逻辑风险 (MDX 渲染 + TipTap 渲染)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="enhanced-textarea" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>增强型 Textarea — 最小改动</h3>
+      <p>保留现有 textarea，叠加工具栏 + 实时预览 + 图片拖拽，最低风险。</p>
+      <div class="pros-cons">
+        <div class="tree">
+          <h4>Pros</h4>
+          <ul>
+            <li>几乎不改现有架构</li>
+            <li>无学习曲线，Markdown 纯文本永远可控</li>
+            <li>最轻量，无额外依赖</li>
+            <li>MDX 自定义组件语法直接手写</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>不是真正的所见即所得</li>
+            <li>预览和编辑分离 (两栏或切换)</li>
+            <li>长文滚动时编辑/预览位置同步难</li>
+            <li>体验提升有限</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>推荐理由：Milkdown (A)</h3>
+  <p>对于这个项目，<strong>内容格式兼容性比功能丰富度更重要</strong>。已有文章 + MDX 自定义组件 (Callout, CodeBlock, ImageCaption) 是核心资产。Milkdown 输出 Markdown 字符串，MDX 管线完全不动；TipTap 的 JSON 存储会引入不必要的转换风险。增强型 textarea 改善有限，不值得专门做一个迭代。</p>
+
+  <div class="mockup">
+    <div class="mockup-header">Milkdown 编辑器预览 (单栏布局)</div>
+    <div class="mockup-body" style="padding:12px;">
+      <div style="text-align:center;padding:24px;background:#f5f5f5;border-radius:6px;border:1px dashed #ccc;margin-bottom:12px;">
+        <span style="color:#999;">📷 拖拽上传封面图 (16:9)</span>
+      </div>
+      <input class="mock-input" value="文章标题" style="font-size:22px;font-weight:700;width:100%;box-sizing:border-box;border:none;border-bottom:1px solid #eee;margin-bottom:8px;">
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px;font-size:13px;">
+        <span style="color:#999;">📂</span>
+        <select style="padding:4px 8px;border:1px solid #ddd;border-radius:4px;"><option>TECH</option><option>ESSAY</option></select>
+        <span style="color:#999;">🏷</span>
+        <input class="mock-input" value="React, 教程" style="width:140px;">
+        <span style="color:#999;margin-left:auto;">👁</span>
+        <select style="padding:4px 8px;border:1px solid #ddd;border-radius:4px;"><option>公开</option><option>私密</option></select>
+      </div>
+      <div style="display:flex;gap:3px;padding:6px 8px;background:#fafafa;border-radius:6px 6px 0 0;border:1px solid #eee;border-bottom:none;flex-wrap:wrap;align-items:center;">
+        <button class="mock-button" style="font-size:11px;padding:2px 6px;">B</button>
+        <button class="mock-button" style="font-size:11px;padding:2px 6px;"><i>I</i></button>
+        <button class="mock-button" style="font-size:11px;padding:2px 6px;">S</button>
+        <span style="color:#ddd;">|</span>
+        <button class="mock-button" style="font-size:11px;padding:2px 6px;">H1</button>
+        <button class="mock-button" style="font-size:11px;padding:2px 6px;">H2</button>
+        <button class="mock-button" style="font-size:11px;padding:2px 6px;">H3</button>
+        <span style="color:#ddd;">|</span>
+        <button class="mock-button" style="font-size:11px;padding:2px 6px;">{"</>"}</button>
+        <button class="mock-button" style="font-size:11px;padding:2px 6px;">🖼</button>
+        <button class="mock-button" style="font-size:11px;padding:2px 6px;">📋</button>
+        <button class="mock-button" style="font-size:11px;padding:2px 6px;">🔗</button>
+        <button class="mock-button" style="font-size:11px;padding:2px 6px;">📊</button>
+        <button class="mock-button" style="font-size:11px;padding:2px 6px;">∑</button>
+        <span style="color:#ddd;">|</span>
+        <button class="mock-button" style="font-size:11px;padding:2px 6px;">💡</button>
+        <span style="font-size:11px;color:#999;margin-left:auto;">Markdown</span>
+      </div>
+      <div style="border:1px solid #eee;border-top:none;border-radius:0 0 6px 6px;min-height:250px;padding:16px;background:#fff;">
+        <h3 style="margin:0 0 8px 0;">第一节</h3>
+        <p style="margin:0 0 8px 0;">所见即所得的编辑体验，<strong>加粗</strong>、<em>斜体</em>、<code>代码</code> 即时渲染。</p>
+        <div style="background:#1e1e1e;color:#d4d4d4;border-radius:4px;padding:10px;font-family:monospace;font-size:13px;margin-bottom:8px;">
+          <span style="color:#6a9955;">// 代码块 — Shiki 高亮</span><br>
+          <span style="color:#569cd6;">const</span> <span style="color:#9cdcfe;">greet</span> = () => <span style="color:#ce9178;">"Hello"</span>;
+        </div>
+        <div style="border-left:3px solid #3b82f6;background:#eff6ff;padding:8px 12px;border-radius:0 4px 4px 0;margin-bottom:8px;">
+          <strong>💡 Info</strong><br>这是 Callout 组件，自定义 MDX 语法直接支持
+        </div>
+        <p style="margin:0;font-size:12px;color:#999;">输入 <code style="background:#e8e8e8;padding:1px 3px;border-radius:2px;">/</code> 弹出块菜单 | 拖拽图片自动上传 | Ctrl+S 自动保存</p>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;">
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button class="mock-button" style="font-size:11px;opacity:0.6;">📅 定时发布</button>
+          <button class="mock-button" style="font-size:11px;opacity:0.6;">🔍 SEO 设置</button>
+          <span style="font-size:10px;color:#4caf50;">● 已自动保存</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="mock-button" style="opacity:0.6;">存草稿</button>
+          <button class="mock-button">发布</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

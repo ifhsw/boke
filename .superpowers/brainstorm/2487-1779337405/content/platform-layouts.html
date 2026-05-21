@@ -1,0 +1,189 @@
+<h2>各大平台文章编辑器布局对比</h2>
+<p class="subtitle">看看成熟的写作平台怎么设计编辑页面</p>
+
+<div class="cards">
+  <div class="card" data-choice="bilibili" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup" style="margin:0;">
+        <div class="mockup-header">B站专栏编辑器</div>
+        <div class="mockup-body" style="padding:12px;display:flex;flex-direction:column;gap:8px;">
+          <div style="text-align:center;padding:20px;background:#f5f5f5;border-radius:4px;border:1px dashed #ccc;">
+            <span style="color:#999;">🎬 拖拽上传封面图 (16:9)</span>
+          </div>
+          <input class="mock-input" value="文章标题" style="font-size:18px;font-weight:700;width:100%;box-sizing:border-box;">
+          <div style="display:flex;gap:8px;align-items:center;">
+            <span class="label">分类:</span>
+            <select style="padding:4px 8px;border:1px solid #ddd;border-radius:4px;"><option>科技</option><option>生活</option></select>
+            <span class="label">标签:</span>
+            <input class="mock-input" value="JavaScript" style="width:100px;">
+            <span style="font-size:11px;color:#999;margin-left:auto;">原创/转载</span>
+          </div>
+          <div style="display:flex;gap:4px;padding:8px;background:#fafafa;border-radius:4px;flex-wrap:wrap;">
+            <button class="mock-button" style="font-size:11px;padding:3px 8px;">B</button>
+            <button class="mock-button" style="font-size:11px;padding:3px 8px;"><i>I</i></button>
+            <button class="mock-button" style="font-size:11px;padding:3px 8px;">H1</button>
+            <button class="mock-button" style="font-size:11px;padding:3px 8px;">H2</button>
+            <button class="mock-button" style="font-size:11px;padding:3px 8px;">🖼</button>
+            <button class="mock-button" style="font-size:11px;padding:3px 8px;">🔗</button>
+            <button class="mock-button" style="font-size:11px;padding:3px 8px;">📋</button>
+            <button class="mock-button" style="font-size:11px;padding:3px 8px;">"</button>
+            <button class="mock-button" style="font-size:11px;padding:3px 8px;">—</button>
+          </div>
+          <div style="border:1px solid #eee;border-radius:4px;min-height:200px;padding:16px;background:#fff;">
+            <p style="margin:0;color:#333;">富文本编辑区 — 所见即所得</p>
+            <p style="font-size:12px;color:#999;">支持拖拽图片、粘贴截图、@提及</p>
+          </div>
+          <div style="display:flex;justify-content:flex-end;gap:8px;">
+            <button class="mock-button" style="opacity:0.6;">存草稿</button>
+            <button class="mock-button">发布</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B站专栏风格</h3>
+      <p>封面图在上方居中，标题大字，富文本工具栏，单栏布局。特点：简单直接、封面图突出。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="juejin" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup" style="margin:0;">
+        <div class="mockup-header">掘金编辑器</div>
+        <div class="mockup-body" style="padding:12px;display:flex;gap:12px;">
+          <div style="flex:0 0 160px;background:#fafafa;border-radius:4px;padding:10px;">
+            <div class="label" style="margin-bottom:6px;">发布设置</div>
+            <div style="font-size:11px;margin-bottom:2px;">封面图</div>
+            <div class="placeholder" style="height:80px;margin-bottom:6px;">3:2 封面</div>
+            <div style="font-size:11px;margin-bottom:2px;">标签 (多选)</div>
+            <input class="mock-input" value="前端" style="width:100%;box-sizing:border-box;margin-bottom:6px;">
+            <input class="mock-input" value="React" style="width:100%;box-sizing:border-box;margin-bottom:6px;">
+            <div style="font-size:11px;margin-bottom:2px;">分类</div>
+            <select style="width:100%;padding:4px;border:1px solid #ddd;border-radius:4px;margin-bottom:6px;"><option>前端</option></select>
+            <div style="font-size:11px;margin-bottom:2px;">文章类型</div>
+            <select style="width:100%;padding:4px;border:1px solid #ddd;border-radius:4px;"><option>原创</option></select>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+            <input class="mock-input" value="文章标题" style="font-size:18px;font-weight:700;width:100%;box-sizing:border-box;border:none;border-bottom:1px solid #eee;">
+            <div style="display:flex;gap:4px;padding:6px;background:#fafafa;border-radius:4px;flex-wrap:wrap;">
+              <button class="mock-button" style="font-size:11px;padding:2px 6px;">B</button>
+              <button class="mock-button" style="font-size:11px;padding:2px 6px;"><i>I</i></button>
+              <button class="mock-button" style="font-size:11px;padding:2px 6px;">H1-H3</button>
+              <button class="mock-button" style="font-size:11px;padding:2px 6px;">{"</>"}</button>
+              <button class="mock-button" style="font-size:11px;padding:2px 6px;">🖼</button>
+              <button class="mock-button" style="font-size:11px;padding:2px 6px;">📋</button>
+            </div>
+            <div style="border:1px solid #eee;border-radius:4px;min-height:200px;padding:16px;background:#fff;">
+              <p style="margin:0;color:#333;">Markdown 编辑器 — 支持实时预览</p>
+              <p style="font-size:12px;color:#999;">分屏：左编辑 / 右预览 / 仅编辑 / 仅预览</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>掘金风格</h3>
+      <p>左侧发布设置面板 + 右侧编辑器。Markdown 编辑 + 分屏预览。特点：元数据与内容分离、开发者友好。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="yuque" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup" style="margin:0;">
+        <div class="mockup-header">语雀 / Notion 风格</div>
+        <div class="mockup-body" style="padding:12px;display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="font-size:24px;">📄</span>
+            <input class="mock-input" value="无标题" style="font-size:24px;font-weight:700;width:100%;box-sizing:border-box;border:none;">
+          </div>
+          <div style="display:flex;gap:4px;align-items:center;padding:4px 0;border-bottom:1px solid #eee;">
+            <span style="font-size:11px;color:#999;">Hover 显示 + 按钮</span>
+            <button style="border:none;background:none;cursor:pointer;font-size:16px;color:#999;">＋</button>
+          </div>
+          <div style="padding:12px;background:#fff;border-radius:4px;">
+            <p style="margin:0 0 4px 0;">输入 <code style="background:#e8e8e8;padding:1px 4px;border-radius:2px;">/</code> 插入任意块...</p>
+          </div>
+          <div style="background:#f9f9f9;border-radius:4px;padding:8px;">
+            <div style="font-size:11px;color:#999;margin-bottom:4px;">/ 菜单 (slash command)</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;">
+              <span style="background:#fff;padding:3px 8px;border-radius:3px;font-size:11px;border:1px solid #eee;">📝 文本</span>
+              <span style="background:#fff;padding:3px 8px;border-radius:3px;font-size:11px;border:1px solid #eee;">H1 标题1</span>
+              <span style="background:#fff;padding:3px 8px;border-radius:3px;font-size:11px;border:1px solid #eee;">H2 标题2</span>
+              <span style="background:#fff;padding:3px 8px;border-radius:3px;font-size:11px;border:1px solid #eee;">🖼 图片</span>
+              <span style="background:#fff;padding:3px 8px;border-radius:3px;font-size:11px;border:1px solid #eee;">📋 代码块</span>
+              <span style="background:#fff;padding:3px 8px;border-radius:3px;font-size:11px;border:1px solid #eee;">📊 表格</span>
+              <span style="background:#fff;padding:3px 8px;border-radius:3px;font-size:11px;border:1px solid #eee;">💡 Callout</span>
+              <span style="background:#fff;padding:3px 8px;border-radius:3px;font-size:11px;border:1px solid #eee;">➗ 分割线</span>
+              <span style="background:#fff;padding:3px 8px;border-radius:3px;font-size:11px;border:1px solid #eee;">📐 数学公式</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>语雀 / Notion 风格</h3>
+      <p>块级编辑器，输入 <code>/</code> 弹出菜单插入任意块。无工具栏、沉浸式写作。特点：现代、灵活、学习成本低。</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="zhihu" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup" style="margin:0;">
+        <div class="mockup-header">知乎编辑器</div>
+        <div class="mockup-body" style="padding:12px;display:flex;flex-direction:column;gap:8px;">
+          <input class="mock-input" value="写下你的标题..." style="font-size:20px;font-weight:700;width:100%;box-sizing:border-box;border:none;">
+          <div style="display:flex;gap:4px;padding:6px 0;border-bottom:1px solid #eee;">
+            <button class="mock-button" style="font-size:11px;padding:2px 8px;">B</button>
+            <button class="mock-button" style="font-size:11px;padding:2px 8px;"><i>I</i></button>
+            <button class="mock-button" style="font-size:11px;padding:2px 8px;">H1</button>
+            <button class="mock-button" style="font-size:11px;padding:2px 8px;">H2</button>
+            <button class="mock-button" style="font-size:11px;padding:2px 8px;">"</button>
+            <button class="mock-button" style="font-size:11px;padding:2px 8px;">•</button>
+            <button class="mock-button" style="font-size:11px;padding:2px 8px;">1.</button>
+            <button class="mock-button" style="font-size:11px;padding:2px 8px;">🖼</button>
+            <span style="font-size:11px;color:#999;margin-left:auto;">Markdown</span>
+          </div>
+          <div style="border:1px solid #eee;border-radius:4px;min-height:180px;padding:16px;">
+            <p style="margin:0;color:#333;">富文本编辑区</p>
+            <p style="font-size:12px;color:#999;">支持复制粘贴图片、引入视频/卡片链接</p>
+          </div>
+          <div style="display:flex;gap:8px;font-size:12px;">
+            <span style="color:#999;">📎 话题:</span>
+            <input class="mock-input" value="JavaScript" style="width:80px;">
+            <span style="color:#999;">🔒 创作声明</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>知乎风格</h3>
+      <p>顶部标题 + 富文本编辑区，底部话题标签。极简设计，发布流程顺畅。特点：话题系统、内容声明。</p>
+    </div>
+  </div>
+</div>
+
+<h3 style="margin-top:32px;">布局模式总结</h3>
+
+<div class="options">
+  <div class="option" data-choice="single" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>单栏布局 (B站/知乎)</h3>
+      <p>封面 → 标题 → 工具栏 → 编辑区 → 发布按钮。适合内容为主的写作，简单直接。元数据（分类、标签）内联在编辑区上下文。</p>
+    </div>
+  </div>
+  <div class="option" data-choice="split" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>分栏布局 (掘金/Halo)</h3>
+      <p>左侧元数据面板（封面、标签、分类、SEO、发布时间）+ 右侧编辑区。信息密度高，适合有复杂发布需求的场景。</p>
+    </div>
+  </div>
+  <div class="option" data-choice="immersive" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>沉浸式布局 (语雀/Notion/Medium)</h3>
+      <p>无工具栏、无侧面板。标题 + 内容，交互全靠 slash 命令和 hover。最大写作空间，适合长文创作。</p>
+    </div>
+  </div>
+</div>

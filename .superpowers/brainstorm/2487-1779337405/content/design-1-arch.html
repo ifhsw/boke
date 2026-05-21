@@ -1,0 +1,70 @@
+<h2>设计第1部分：整体架构变更</h2>
+<p class="subtitle">从 Markdown textarea → TipTap 富文本编辑器</p>
+
+<div class="section">
+  <h3>内容存储变化</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:14px;">
+    <tr style="background:#f5f5f5;">
+      <th style="padding:8px;text-align:left;border:1px solid #eee;">层面</th>
+      <th style="padding:8px;text-align:left;border:1px solid #eee;">改前</th>
+      <th style="padding:8px;text-align:left;border:1px solid #eee;">改后</th>
+    </tr>
+    <tr>
+      <td style="padding:8px;border:1px solid #eee;"><strong>编辑器</strong></td>
+      <td style="padding:8px;border:1px solid #eee;">&lt;textarea&gt; + marked 预览</td>
+      <td style="padding:8px;border:1px solid #eee;">TipTap React 组件 (WYSIWYG)</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border:1px solid #eee;"><strong>存储格式</strong></td>
+      <td style="padding:8px;border:1px solid #eee;">Markdown 字符串</td>
+      <td style="padding:8px;border:1px solid #eee;">TipTap JSON (Prisma Json 类型)</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border:1px solid #eee;"><strong>服务端渲染</strong></td>
+      <td style="padding:8px;border:1px solid #eee;">compileMdx() → MDX组件</td>
+      <td style="padding:8px;border:1px solid #eee;">generateHTML() → sanitized HTML</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border:1px solid #eee;"><strong>MDX 组件</strong></td>
+      <td style="padding:8px;border:1px solid #eee;">Callout, CodeBlock, ImageCaption</td>
+      <td style="padding:8px;border:1px solid #eee;">重写为 TipTap Node Extensions</td>
+    </tr>
+  </table>
+</div>
+
+<div class="section">
+  <h3>新增/变更的依赖</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:14px;">
+    <tr style="background:#f5f5f5;">
+      <th style="padding:8px;text-align:left;border:1px solid #eee;">包</th>
+      <th style="padding:8px;text-align:left;border:1px solid #eee;">用途</th>
+    </tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><code>@tiptap/react</code></td><td style="padding:8px;border:1px solid #eee;">React 编辑器组件</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><code>@tiptap/starter-kit</code></td><td style="padding:8px;border:1px solid #eee;">基础扩展包 (bold, italic, heading, code, etc.)</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><code>@tiptap/extension-image</code></td><td style="padding:8px;border:1px solid #eee;">图片拖拽/粘贴/上传</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><code>@tiptap/extension-code-block-lowlight</code></td><td style="padding:8px;border:1px solid #eee;">代码块 + Shiki 高亮</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><code>@tiptap/extension-table</code></td><td style="padding:8px;border:1px solid #eee;">表格支持</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><code>@tiptap/extension-link</code></td><td style="padding:8px;border:1px solid #eee;">链接</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><code>@tiptap/extension-placeholder</code></td><td style="padding:8px;border:1px solid #eee;">占位文字</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><code>@tiptap/extension-character-count</code></td><td style="padding:8px;border:1px solid #eee;">字数统计</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><code>@tiptap/extension-task-list</code> + <code>task-item</code></td><td style="padding:8px;border:1px solid #eee;">任务列表</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><code>lowlight</code></td><td style="padding:8px;border:1px solid #eee;">Shiki → lowlight 适配 TipTap</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h3>Prisma Schema 变更</h3>
+  <pre style="background:#1e1e1e;color:#d4d4d4;padding:12px;border-radius:6px;font-size:13px;overflow-x:auto;"><code>model Post {
+  // ... 保留字段 ...
+  content     String  // 改前: Markdown 字符串
+  content     Json    // 改后: TipTap JSON { type: "doc", content: [...] }
+
+  // 新增字段
+  coverImage  String? // 已有但没用上 → 现在有 UI 了
+  seoTitle    String? // 新增: SEO 标题
+  seoDesc     String? // 新增: SEO 描述
+  slug        String  // 已有 → 允许手动编辑
+  scheduledAt DateTime? // 新增: 定时发布时间
+  wordCount   Int?    // 新增: 字数 (发布时计算)
+}</code></pre>
+</div>

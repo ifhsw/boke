@@ -1,0 +1,84 @@
+<h2>设计第3部分：交互细节 & 功能清单</h2>
+<p class="subtitle">编辑器核心功能和交互行为</p>
+
+<div class="section">
+  <h3>⌨️ 输入交互</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:13px;">
+    <tr style="background:#f5f5f5;"><th style="padding:8px;text-align:left;border:1px solid #eee;">交互</th><th style="padding:8px;text-align:left;border:1px solid #eee;">行为</th></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><strong>Markdown 快捷输入</strong></td><td style="padding:8px;border:1px solid #eee;">输入 <code>#</code> 空格 → H1，<code>##</code> → H2，<code>**文字**</code> → 加粗，<code>`代码`</code> → 行内代码，<code>&gt;</code> → 引用块 等。TipTap 内置支持。</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><strong>斜杠命令 /</strong></td><td style="padding:8px;border:1px solid #eee;">行首输入 <code>/</code> 弹出菜单：H1/H2/H3、图片、代码块、表格、Callout、数学公式、分割线、列表、任务列表、引用</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><strong>浮动菜单</strong></td><td style="padding:8px;border:1px solid #eee;">选中文字后浮现 Bubble Menu：加粗、斜体、删除线、链接、行内代码</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><strong>键盘快捷键</strong></td><td style="padding:8px;border:1px solid #eee;">Ctrl+B 加粗、Ctrl+I 斜体、Ctrl+K 链接、Ctrl+Z 撤销、Ctrl+Shift+Z 重做、Ctrl+S 手动保存</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h3>🖼 图片处理</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:13px;">
+    <tr style="background:#f5f5f5;"><th style="padding:8px;text-align:left;border:1px solid #eee;">场景</th><th style="padding:8px;text-align:left;border:1px solid #eee;">实现</th></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><strong>拖拽上传</strong></td><td style="padding:8px;border:1px solid #eee;">拖拽图片到编辑区 → 自动上传到 /api/upload → 插入图片节点。上传中显示占位 loading。</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><strong>粘贴截图</strong></td><td style="padding:8px;border:1px solid #eee;">Ctrl+V 粘贴剪贴板图片 → 自动上传 → 插入。复用 handlePaste 钩子。</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><strong>工具栏按钮</strong></td><td style="padding:8px;border:1px solid #eee;">点击工具栏图片按钮 → 打开文件选择器 → 上传 → 插入。</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><strong>封面图上传</strong></td><td style="padding:8px;border:1px solid #eee;">独立的上传区域（顶部虚线框），与编辑器共享同一个 /api/upload 接口。上传后存储 URL 到 coverImage 字段。</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><strong>图片节点交互</strong></td><td style="padding:8px;border:1px solid #eee;">点击图片选中 → 可拖拽调整大小 / 设置标题 (caption) / 删除。</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h3>💾 自动保存</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:13px;">
+    <tr style="background:#f5f5f5;"><th style="padding:8px;text-align:left;border:1px solid #eee;">机制</th><th style="padding:8px;text-align:left;border:1px solid #eee;">说明</th></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><strong>本地草稿 (localStorage)</strong></td><td style="padding:8px;border:1px solid #eee;">每次内容变化后 3 秒防抖 → 序列化编辑器 JSON 到 localStorage。刷新页面/意外关闭后可恢复。</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><strong>服务端草稿</strong></td><td style="padding:8px;border:1px solid #eee;">每 30 秒自动保存到服务端 (status=DRAFT)，或手动 Ctrl+S 立即保存。</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><strong>状态指示灯</strong></td><td style="padding:8px;border:1px solid #eee;">顶部栏绿色圆点 + "已保存" / "保存中..." / "未保存" 文字。</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;"><strong>草稿恢复提示</strong></td><td style="padding:8px;border:1px solid #eee;">新建文章时检测 localStorage 是否有未发布的草稿 → 弹窗 "检测到未保存的草稿，是否恢复？"</td></tr>
+  </table>
+</div>
+
+<div class="section">
+  <h3>🧩 自定义 TipTap 扩展 (替代原 MDX 组件)</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:13px;">
+    <tr style="background:#f5f5f5;"><th style="padding:8px;text-align:left;border:1px solid #eee;">扩展</th><th style="padding:8px;text-align:left;border:1px solid #eee;">说明</th><th style="padding:8px;text-align:left;border:1px solid #eee;">渲染 (NodeView)</th></tr>
+    <tr>
+      <td style="padding:8px;border:1px solid #eee;"><strong>Callout</strong></td>
+      <td style="padding:8px;border:1px solid #eee;">4 种类型：Info (蓝)、Warn (黄)、Tip (绿)、Note (灰)。通过 / 菜单或工具栏插入。</td>
+      <td style="padding:8px;border:1px solid #eee;">带颜色左边框 + 图标 + 背景色的卡片</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border:1px solid #eee;"><strong>CodeBlock (Shiki)</strong></td>
+      <td style="padding:8px;border:1px solid #eee;">代码块 + 语言选择器 + Shiki 高亮。编辑时显示语言标签。</td>
+      <td style="padding:8px;border:1px solid #eee;">macOS 三点 + 文件名栏 + 深色背景代码区</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border:1px solid #eee;"><strong>ImageCaption</strong></td>
+      <td style="padding:8px;border:1px solid #eee;">图片 + 描述文字。替代原 MDX ImageCaption。</td>
+      <td style="padding:8px;border:1px solid #eee;">圆角图片 + 下方灰色居中描述</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;border:1px solid #eee;"><strong>Math (KaTeX)</strong></td>
+      <td style="padding:8px;border:1px solid #eee;">行内公式 + 块级公式。通过 / 菜单或 $$ 快捷输入。</td>
+      <td style="padding:8px;border:1px solid #eee;">KaTeX 渲染的数学公式</td>
+    </tr>
+  </table>
+</div>
+
+<div class="section">
+  <h3>📋 标签输入组件</h3>
+  <p style="font-size:13px;">替换当前逗号分隔的 input。独立的多标签输入组件：</p>
+  <ul style="font-size:13px;">
+    <li>输入文字后按 <strong>回车</strong> 或 <strong>逗号</strong> 确认一个标签</li>
+    <li>每个标签显示为 chip/badge，带 × 删除按钮</li>
+    <li>自动补全已有标签（从数据库查询）</li>
+    <li>点击已有标签直接添加</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h3>⏰ 定时发布</h3>
+  <ul style="font-size:13px;">
+    <li>设置 <code>scheduledAt</code> 后，状态保持 DRAFT</li>
+    <li>非管理员投稿强制 DRAFT + 审核，不直接支持定时发布</li>
+    <li>前端倒计时显示 "将于 2026-05-22 10:00 发布"</li>
+    <li>管理员可直接设定 PUBLISHED + 未来时间 = 预发布状态</li>
+  </ul>
+</div>

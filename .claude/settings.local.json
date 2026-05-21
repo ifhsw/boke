@@ -82,7 +82,25 @@
       "Bash(git -C C:/Users/shi/Desktop/book commit --allow-empty -m \"chore: update blog submodule\")",
       "Bash(git -C C:/Users/shi/Desktop/book/blog commit -m \"feat: admin can delete users with cascade cleanup\")",
       "Bash(git -C C:/Users/shi/Desktop/book/blog commit -m \"fix: type error in deleteUser\")",
-      "Bash(git -C C:/Users/shi/Desktop/book/blog commit -m \"feat: floating back button on post page with scroll restoration\")"
+      "Bash(git -C C:/Users/shi/Desktop/book/blog commit -m \"feat: floating back button on post page with scroll restoration\")",
+      "Bash(git submodule *)",
+      "Skill(superpowers:systematic-debugging)",
+      "Bash(taskkill *)",
+      "Bash(cmd *)",
+      "Bash(git restore *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(chmod 600 \"/c/Users/shi/Desktop/服务器ssh.pem\")",
+      "Bash(sqlite3 dev.db \"SELECT id, username, email, role FROM User;\")",
+      "Bash(node -e 'const {PrismaClient}=require\\('\\\\''@prisma/client'\\\\''\\);const p=new PrismaClient\\(\\);p.user.findMany\\(\\).then\\(u=>{console.log\\(JSON.stringify\\(u.map\\(x=>\\({id:x.id,username:x.username,email:x.email,role:x.role}\\)\\),null,2\\)\\);p.$disconnect\\(\\)}\\)')",
+      "Bash(git *)",
+      "mcp__puppeteer__puppeteer_select",
+      "Bash(npm uninstall *)",
+      "Bash(node -e \"require\\('@tiptap/react'\\); console.log\\('TipTap OK'\\)\")",
+      "Bash(node -e \"require\\('lowlight'\\); console.log\\('lowlight OK'\\)\")",
+      "Bash(node -e \"const r = require\\('@tiptap/react'\\); console.log\\(Object.keys\\(r\\).sort\\(\\).join\\('\\\\n'\\)\\)\")",
+      "Bash(node -e \"console.log\\(require\\('@tiptap/react/package.json'\\).version\\)\")",
+      "Bash(cmd.exe *)"
     ]
   }
 }

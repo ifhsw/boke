@@ -1,0 +1,139 @@
+<h2>设计第2部分：编辑器页面布局</h2>
+<p class="subtitle">单栏布局 (B站风格)，从上到下的编辑流程</p>
+
+<div class="mockup" style="max-width:800px;">
+  <div class="mockup-header">文章编辑器 — 完整布局</div>
+  <div class="mockup-body" style="padding:0;background:#fafafa;">
+
+    <!-- 顶部栏 -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#fff;border-bottom:1px solid #eee;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span style="font-weight:600;font-size:14px;">✏️ 写文章</span>
+        <span style="font-size:10px;color:#4caf50;">● 已保存</span>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="mock-button" style="font-size:12px;">💾 存草稿</button>
+        <button class="mock-button" style="font-size:12px;background:#1a1a2e;color:#fff;">发布</button>
+      </div>
+    </div>
+
+    <!-- 封面图区域 -->
+    <div style="margin:16px 16px 0;">
+      <div style="text-align:center;padding:40px;background:#fff;border-radius:6px;border:2px dashed #ddd;cursor:pointer;">
+        <span style="font-size:32px;color:#ccc;">🖼</span>
+        <p style="margin:8px 0 0;color:#999;font-size:13px;">点击或拖拽上传封面图</p>
+        <p style="margin:4px 0 0;color:#bbb;font-size:11px;">推荐 1920×1080, JPG/PNG/WebP, 最大 10MB</p>
+      </div>
+    </div>
+
+    <!-- 标题 -->
+    <div style="padding:16px 16px 0;">
+      <textarea placeholder="文章标题..." style="width:100%;box-sizing:border-box;border:none;font-size:24px;font-weight:700;resize:none;outline:none;font-family:inherit;line-height:1.4;" rows="2"></textarea>
+    </div>
+
+    <!-- 元数据行 -->
+    <div style="padding:8px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;border-bottom:1px solid #f0f0f0;">
+      <div style="display:flex;align-items:center;gap:4px;">
+        <span style="font-size:12px;color:#999;">📂</span>
+        <select style="padding:4px 8px;border:1px solid #e0e0e0;border-radius:4px;font-size:12px;background:#fff;">
+          <option>技术 TECH</option>
+          <option>随笔 ESSAY</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:4px;flex:1;">
+        <span style="font-size:12px;color:#999;">🏷</span>
+        <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap;">
+          <span style="background:#e8e8e8;padding:2px 6px;border-radius:3px;font-size:11px;display:flex;align-items:center;gap:3px;">React <span style="cursor:pointer;color:#999;">×</span></span>
+          <span style="background:#e8e8e8;padding:2px 6px;border-radius:3px;font-size:11px;display:flex;align-items:center;gap:3px;">教程 <span style="cursor:pointer;color:#999;">×</span></span>
+          <input placeholder="添加标签..." style="border:none;outline:none;font-size:12px;width:80px;background:transparent;">
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <span style="font-size:12px;color:#999;">👁</span>
+        <select style="padding:4px 8px;border:1px solid #e0e0e0;border-radius:4px;font-size:12px;background:#fff;">
+          <option>公开</option>
+          <option>仅自己可见</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 工具栏 -->
+    <div style="margin:12px 16px 0;display:flex;gap:2px;padding:6px 8px;background:#fff;border:1px solid #e8e8e8;border-radius:8px;flex-wrap:wrap;align-items:center;">
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;font-weight:600;" title="加粗">B</button>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;font-style:italic;" title="斜体">I</button>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;text-decoration:line-through;" title="删除线">S</button>
+      <span style="color:#e0e0e0;margin:0 4px;">|</span>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;" title="标题1">H1</button>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;" title="标题2">H2</button>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;" title="标题3">H3</button>
+      <span style="color:#e0e0e0;margin:0 4px;">|</span>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;" title="引用">{">"}</button>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;" title="代码块">{"</>"}</button>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;" title="图片">🖼</button>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;" title="表格">⊞</button>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;" title="链接">🔗</button>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;" title="分割线">—</button>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;" title="列表">•</button>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;" title="有序列表">1.</button>
+      <span style="color:#e0e0e0;margin:0 4px;">|</span>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;" title="Callout - 提示">💡</button>
+      <button class="mock-button" style="font-size:11px;padding:3px 7px;" title="数学公式">∑</button>
+      <span style="font-size:10px;color:#999;margin-left:auto;">TipTap</span>
+    </div>
+
+    <!-- 编辑区 -->
+    <div style="margin:12px 16px;background:#fff;border:1px solid #e8e8e8;border-radius:8px;min-height:400px;padding:20px;font-size:15px;line-height:1.8;">
+      <p style="margin:0 0 12px 0;">所见即所得的编辑区域。</p>
+      <p style="margin:0 0 12px 0;">选中文字即浮现<strong>浮动菜单</strong> (加粗/斜体/链接)。</p>
+      <p style="margin:0 0 12px 0;">输入 <code style="background:#eee;padding:1px 5px;border-radius:3px;">/</code> 弹出<strong>斜杠命令面板</strong>。</p>
+      <p style="margin:0 0 12px 0;color:#999;font-size:13px;">支持拖拽图片、粘贴截图、Ctrl+B 加粗、Markdown 快捷输入 (# 标题、**加粗**等)</p>
+    </div>
+
+    <!-- 底部折叠面板 -->
+    <div style="margin:0 16px 16px;display:flex;flex-direction:column;gap:8px;">
+      <details style="background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:10px 16px;">
+        <summary style="cursor:pointer;font-size:13px;color:#666;">🔍 SEO 设置</summary>
+        <div style="margin-top:8px;display:flex;flex-direction:column;gap:8px;">
+          <div>
+            <span style="font-size:11px;color:#999;">自定义 Slug</span>
+            <input class="mock-input" value="my-article-slug" style="width:100%;box-sizing:border-box;margin-top:2px;">
+          </div>
+          <div style="display:flex;gap:8px;">
+            <div style="flex:1;">
+              <span style="font-size:11px;color:#999;">SEO 标题</span>
+              <input class="mock-input" value="文章标题 | 玄桥博客" style="width:100%;box-sizing:border-box;margin-top:2px;">
+            </div>
+            <div style="flex:1;">
+              <span style="font-size:11px;color:#999;">SEO 描述</span>
+              <input class="mock-input" value="文章摘要，用于搜索引擎展示..." style="width:100%;box-sizing:border-box;margin-top:2px;">
+            </div>
+          </div>
+        </div>
+      </details>
+      <details style="background:#fff;border:1px solid #e8e8e8;border-radius:8px;padding:10px 16px;">
+        <summary style="cursor:pointer;font-size:13px;color:#666;">📅 定时发布</summary>
+        <div style="margin-top:8px;display:flex;gap:8px;align-items:center;">
+          <input type="datetime-local" class="mock-input" value="2026-05-22T10:00" style="width:200px;">
+          <span style="font-size:11px;color:#999;">留空则立即发布</span>
+        </div>
+      </details>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>布局要点</h3>
+  <table style="width:100%;border-collapse:collapse;font-size:14px;">
+    <tr style="background:#f5f5f5;">
+      <th style="padding:8px;text-align:left;border:1px solid #eee;">区域</th>
+      <th style="padding:8px;text-align:left;border:1px solid #eee;">说明</th>
+    </tr>
+    <tr><td style="padding:8px;border:1px solid #eee;">顶部状态栏</td><td style="padding:8px;border:1px solid #eee;">固定顶部 (sticky)，含保存状态指示灯、"存草稿"和"发布"按钮</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;">封面图</td><td style="padding:8px;border:1px solid #eee;">虚线框提示，支持点击上传和拖拽，上传后显示预览图带删除按钮</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;">标题</td><td style="padding:8px;border:1px solid #eee;">无边框 textarea，自动撑高，placeholder "文章标题..."</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;">元数据行</td><td style="padding:8px;border:1px solid #eee;">分类下拉 + 标签输入（带删除的多标签）+ 可见性切换</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;">工具栏</td><td style="padding:8px;border:1px solid #eee;">固定在编辑区上方 (sticky)，分组排列，选中文本时浮动菜单同时出现</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;">编辑区</td><td style="padding:8px;border:1px solid #eee;">TipTap 编辑器主体，最小高度 400px，支持 / 斜杠命令</td></tr>
+    <tr><td style="padding:8px;border:1px solid #eee;">折叠面板</td><td style="padding:8px;border:1px solid #eee;">SEO 设置 + 定时发布，默认折叠，减少视觉干扰</td></tr>
+  </table>
+</div>
